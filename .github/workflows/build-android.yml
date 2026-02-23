@@ -20,7 +20,7 @@ jobs:
       - name: Instalar Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          flutter-version: '3.38.7' # La versión exacta que pide Flet
 
       - name: Instalar Python
         uses: actions/setup-python@v5
@@ -31,8 +31,8 @@ jobs:
         run: pip install flet requests
 
       - name: Construir el APK
-        run: flet build apk --verbose -y
-
+        run: flet build apk --verbose -y # El -y acepta la instalación automáticamente
+        
       - name: Subir el APK final
         uses: actions/upload-artifact@v4
         with:
