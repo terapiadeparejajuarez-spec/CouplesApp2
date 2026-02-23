@@ -8,29 +8,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clonar el código
+      - name: Checkout del codigo
         uses: actions/checkout@v4
 
-      - name: Instalar Java
+      - name: Configurar Java
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Instalar Python
+      - name: Configurar Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Instalar requerimientos
+      - name: Instalar librerias
         run: pip install flet requests
 
-      - name: Construir el APK
+      - name: Compilar APK
         run: flet build apk --verbose --android-permissions INTERNET --yes
-          # Usamos un comando de Linux para responder "y" automáticamente si Flet pregunta algo
-          yes | flet build apk --verbose --permissions INTERNET
-        
-      - name: Subir el APK final
+
+      - name: Guardar el instalador
         uses: actions/upload-artifact@v4
         with:
           name: App-Gottman-APK
