@@ -28,7 +28,7 @@ jobs:
       - name: Construir el APK
         run: |
           # Usamos un comando de Linux para responder "y" automáticamente si Flet pregunta algo
-          yes | flet build apk --verbose
+          yes | flet build apk --verbose --permissions INTERNET
         
       - name: Subir el APK final
         uses: actions/upload-artifact@v4
