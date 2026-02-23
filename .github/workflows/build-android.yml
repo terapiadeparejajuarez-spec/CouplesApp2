@@ -1,7 +1,7 @@
 name: Construir APK de Android
 
 on:
-  workflow_dispatch: # Esto crea un botón manual para iniciar la creación
+  workflow_dispatch:
 
 jobs:
   build:
@@ -11,6 +11,17 @@ jobs:
       - name: Clonar el código
         uses: actions/checkout@v4
 
+      - name: Instalar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Instalar Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
       - name: Instalar Python
         uses: actions/setup-python@v5
         with:
@@ -18,7 +29,7 @@ jobs:
 
       - name: Instalar Flet y requerimientos
         run: |
-          pip install -r requirements.txt
+          pip install flet requests
 
       - name: Construir el APK
         run: flet build apk
