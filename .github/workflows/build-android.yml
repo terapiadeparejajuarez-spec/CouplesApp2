@@ -1,0 +1,30 @@
+name: Construir APK de Android
+
+on:
+  workflow_dispatch: # Esto crea un botón manual para iniciar la creación
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el código
+        uses: actions/checkout@v4
+
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar Flet y requerimientos
+        run: |
+          pip install -r requirements.txt
+
+      - name: Construir el APK
+        run: flet build apk
+
+      - name: Subir el APK final
+        uses: actions/upload-artifact@v4
+        with:
+          name: App-Gottman-APK
+          path: build/apk/**/*.apk
