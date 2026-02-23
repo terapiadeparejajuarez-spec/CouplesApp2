@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout del codigo
+      - name: Clonar el código
         uses: actions/checkout@v4
 
       - name: Configurar Java
@@ -16,6 +16,9 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '17'
+
+      - name: Aceptar licencias de Android
+        run: yes | sdkmanager --licenses || true
 
       - name: Configurar Python
         uses: actions/setup-python@v5
@@ -26,7 +29,7 @@ jobs:
         run: pip install flet requests
 
       - name: Compilar APK
-        run: flet build apk --verbose --android-permissions INTERNET --yes
+        run: flet build apk --verbose --yes
 
       - name: Guardar el instalador
         uses: actions/upload-artifact@v4
