@@ -27,9 +27,8 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Instalar Flet y requerimientos
-        run: |
-          pip install flet requests
+      - name: Instalar requerimientos
+        run: pip install flet requests
 
       - name: Construir el APK
         run: flet build apk --verbose
