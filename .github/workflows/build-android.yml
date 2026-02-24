@@ -29,7 +29,7 @@ jobs:
         run: pip install flet requests
 
       - name: Compilar APK
-        run: flet build apk --verbose --yes
+        run: flet build apk --arch arm64-v8a --verbose --yes
 
       - name: Guardar el instalador
         uses: actions/upload-artifact@v4
